@@ -145,10 +145,10 @@ $ celery -A plaid_manager worker -l info
   
 ### AccountModel
   
--	account_id = models.CharField(max_length=100)
--	bank_item = models.ForeignKey(BankItemModel, on_delete=models.CASCADE)
--	balance_available = models.FloatField(default=None, null=True)
--	balance_current = models.FloatField()
+-	account_id
+-	bank_item
+-	balance_available
+-	balance_current
 
 ### TransactionModel
   
