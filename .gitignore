@@ -1,0 +1,7 @@
+env/
+db.sqlite3
+PlaidApp/__pycache__/
+PlaidApp/migrations/
+plaid_manager/__pycache__/
+CustomUser/__pycache__/
+CustomUser/migrations/
