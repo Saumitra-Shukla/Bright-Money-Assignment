@@ -36,11 +36,11 @@ class getLinkToken(APIView):
 	def post(self,request):
 
 		user = request.user
-		client_id="5ffc80e8df1def001398886a"
+		#client_id="5ffc80e8df1def001398886a"
 		if user.is_authenticated:
 			configs = {
 				'user': {
-					'client_user_id': client_id
+					'client_user_id': PLAID_CLIENT_ID
 					},
 
 				'products': ['auth', 'transactions'],
@@ -173,6 +173,10 @@ class getAccounts(APIView):
 				accounts_responses=[]
 				for access_token_obj in access_token_obj_list:
 					access_token = access_token_obj['access_token']
+
+					'''
+					account_response=get_account.delay(access_token_obj)
+					'''
 					account_response = client.Accounts.get(access_token)
 					accounts_responses.append(account_response['accounts'])
 

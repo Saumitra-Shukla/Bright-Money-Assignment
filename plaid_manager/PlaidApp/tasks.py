@@ -9,6 +9,31 @@ from PlaidApp.keys import PLAID_CLIENT_ID,PLAID_SECRET,PLAID_ENV
 client = plaid.Client(client_id=PLAID_CLIENT_ID, secret=PLAID_SECRET,environment=PLAID_ENV)
 
 
+@shared_task
+def get_account(access_token_obj):
+
+	access_token = access_token_obj['access_token']
+	account_response = client.Accounts.get(access_token)
+
+	api_log_obj = APILogModel.objects.create(
+						request_id=account_response['request_id'], 
+						api_type="get_accounts")
+	api_log_obj.save()
+	return account_response
+
+@shared_task
+def get_item(access_token_obj):
+
+	access_token = access_token_obj['access_token']
+	item_response = client.Items.get(access_token)
+
+	api_log_obj = APILogModel.objects.create(
+						request_id=item_response['request_id'], 
+						api_type="get_items")
+	api_log_obj.save()
+	return item_response
+
+
 
 @shared_task
 def get_transactions(access_token=None, bank_item_id=None, new_transactions=500,days=30):
